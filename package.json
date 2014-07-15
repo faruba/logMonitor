@@ -1,0 +1,33 @@
+{
+  "name": "logServer",
+  "version": "0.0.1",
+  "description": "My own log server",
+  "main": "log.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "moment": "~2.5.0"
+  },
+  "devDependencies": {
+    "socket.io": "^1.0.6"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node log.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kun-g/logMonitor"
+  },
+  "keywords": [
+    "node.js",
+    "game",
+    "log"
+  ],
+  "author": "Kun.G",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/kun-g/logMonitor/issues"
+  }
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html ng-app="logApp">
+  <head>
+    <script src="angular.min.js"></script>
+    <script src="moment.js"></script>
+    <script src="socket.io.js"></script>
+    <script src="app.js"></script>
+    <script src="services.js"></script>
+    <script src="logCtrl.js"></script>
+  </head>
+  <body>
+    <div ng-controller="LogCtrl">
+      <input ng-model="search.$">
+      <input ng-model="search.type">
+      <input ng-model="search.log">
+      <input ng-model="timeFrom">
+      <input ng-model="timeTo">
+      <table>
+        <tr><th> Time </th> <th> Type </th> <th> Log </th></tr>
+        <tr ng-repeat="log in logs | checkMark :timeFrom :timeTo  | filter :search">
+          <td> {{log.time | date: 'mediumTime'}} </td>
+          <td> {{log.type}} </td>
+          <td> {{log.log}} </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
