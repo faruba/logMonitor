@@ -23,7 +23,7 @@ logApp.service('socket', [ '$rootScope', function ($rootScope) {
     }
   };
 }])
-.filter('checkMark', [function () {
+.filter('timeFilter', [function () {
   return function (objects, from, to) {
     if (from) from = moment(from);
     if (to) to = moment(to);
@@ -32,6 +32,28 @@ logApp.service('socket', [ '$rootScope', function ($rootScope) {
       if (from && now.isBefore(from)) return false;
       if (to && now.isAfter(to)) return false;
       return true;
+    });
+  }
+}])
+.filter('translate', [function () {
+  return function (logs) {
+    var config = { 'Error': 'danger', 'Info': 'info', 'Debug': 'warning' };
+    return logs.map(function (e) {
+      var type = e.type;
+      if (!config[type]) return e;
+      e.type = config[type];
+      if (type == 'Info') {
+        var tmp = JSON.parse(e.log);
+        if (tmp.request) { // Client Request
+          e.request = translateRequest(tmp.request);
+          e.response = translateResponse(tmp.response);
+          e.origin = false;
+          delete e.log;
+        }
+      } else {
+        e.origin = true;
+      }
+      return e;
     });
   }
 }])
