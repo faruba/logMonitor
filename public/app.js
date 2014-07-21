@@ -60,6 +60,11 @@ logApp.service('socket', [ '$rootScope', function ($rootScope) {
 .controller('LogCtrl', ['$scope', 'socket', function (scope, socket) {
   scope.text = 0;
   scope.logs = [ ];
+
+  var now = new Date();
+  scope.timeFrom = new Date(now.getTime() - 6 * 3600 * 1000);
+  scope.timeTo = new Date(now.getTime() + 6 * 3600 * 1000);
+
   socket.on('logging', function (msg) {
     try {
       scope.logs.push(JSON.parse(msg));
